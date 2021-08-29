@@ -40,6 +40,7 @@ public class StringRecursion {
 		}
 	}
 
+	// not yet solved
 	public static int indexOf(char ch, String str) {
 		if (str == "" || str == null) {
 			return -1;
@@ -73,8 +74,7 @@ public class StringRecursion {
 		// System.out.println(weave("", ""));
 		// System.out.println(weave("hello", null));
 		System.out.println(
-
-				indexOf('b', "Rabbit")// should return 2
+			indexOf('b', "Rabbit")// should return 2
 		);
 		// indexOf('P', "Rabbit");// should return -1
 

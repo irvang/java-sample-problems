@@ -11,27 +11,31 @@ After calling swapPairs(values), the contents of the values array should be {2, 
 public class Swap {
 
 	public static void swapPairs(int[] arr) {
-		if (arr == null) {
-			throw new IllegalArgumentException("This is illegality!");
-		}
-		// System.out.println( "array length: " + arr.length);
+		try {
 
-		for (int i = 0; i < arr.length; i += 2) {
-			if (arr.length % 2 == 0) {
-				int temp = arr[i];
-				arr[i] = arr[i + 1];
-				arr[i + 1] = temp;
-			} else if (i != arr.length - 1) {
-				int temp = arr[i];
-				arr[i] = arr[i + 1];
-				arr[i + 1] = temp;
+			if (arr == null) {
+				throw new IllegalArgumentException("This is illegality!");
 			}
-		}
 
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + ",");
+			for (int i = 0; i < arr.length; i += 2) {
+				if (arr.length % 2 == 0) {
+					int temp = arr[i];
+					arr[i] = arr[i + 1];
+					arr[i + 1] = temp;
+				} else if (i != arr.length - 1) {
+					int temp = arr[i];
+					arr[i] = arr[i + 1];
+					arr[i + 1] = temp;
+				}
+			}
+
+			for (int i = 0; i < arr.length; i++) {
+				System.out.print(arr[i] + ",");
+			}
+			System.out.println();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		System.out.println();
 	}
 
 	public static void main(String[] args) {

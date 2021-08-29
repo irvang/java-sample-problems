@@ -13,22 +13,26 @@ public class Date {
 	private int year;
 
 	public Date(int month, int day, int year) throws Exception {
-		try {
+		// try {
 
-			if (year < Date.MIN_YEAR) {
-				throw new Exception("The minimum year is 1583");
-			} else if (month < 1 || month > 12) {
-				throw new Exception("Month error: month should be a number between 1 and 12");
-			} else if (day < 1 || day > numDaysInMonth(month, year)) {
-				throw new Exception("Day should be a number greater than one... and less than the days on that month");
-			}
-
-			this.month = month;
-			this.day = day;
-			this.year = year;
-		} catch (Exception e) {
-			throw e;
+		if (year < Date.MIN_YEAR) {
+			throw new Exception("The minimum year is 1583");
+		} else if (month < 1 || month > 12) {
+			throw new Exception(
+				"Month error: month should be a number between 1 and 12");
+		} else if (day < 1 || day > numDaysInMonth(month, year)) {
+			throw new Exception(
+				"Day should be a number greater than one... and less than the days on that month");
 		}
+
+		this.month = month;
+		this.day = day;
+		this.year = year;
+		// } catch (Exception e) {
+		// // e.printStackTrace();
+		// System.out.println(e);
+		// throw e;
+		// }
 	}
 
 	// Accessor methods
@@ -49,12 +53,14 @@ public class Date {
 	}
 
 	public String dayOfWeekName() {
-		int numberDayOfWeek = Date.dayOfWeekNumber(this.month, this.day, this.year);
+		int numberDayOfWeek = Date.dayOfWeekNumber(this.month, this.day,
+			this.year);
 		return Date.DAYS_OF_WEEK[numberDayOfWeek];
 	}
 
 	public String toString() {
-		return this.dayOfWeekName() + ", " + this.monthName() + " " + this.getDay() + ", " + this.getYear();
+		return this.dayOfWeekName() + ", " + this.monthName() + " "
+			+ this.getDay() + ", " + this.getYear();
 	}
 
 	public boolean equals(Date dateToCompare) {
@@ -93,37 +99,40 @@ public class Date {
 	}
 
 	/*
-	 * A class-constant array containing the names of the months. The positions of
-	 * the names in the array correspond to the numbers of the months. For example,
-	 * "January" is at position 1 in the array because its month number is 1, and
-	 * "December" is in position 12 because its month number is 12. The string
-	 * "none" appears in position 0, because there is no month that corresponds to
-	 * the number 0.
+	 * A class-constant array containing the names of the months. The positions
+	 * of the names in the array correspond to the numbers of the months. For
+	 * example, "January" is at position 1 in the array because its month number
+	 * is 1, and "December" is in position 12 because its month number is 12.
+	 * The string "none" appears in position 0, because there is no month that
+	 * corresponds to the number 0.
 	 */
-	public static final String[] MONTHS = { "none", "January", "February", "March", "April", "May", "June", "July",
-			"August", "September", "October", "November", "December" };
+	public static final String[] MONTHS = { "none", "January", "February",
+		"March", "April", "May", "June", "July", "August", "September",
+		"October", "November", "December" };
 
 	/*
 	 * A class-constant array containing the number of days in each month. Here
-	 * again, the positions of the values correspond to the numbers of the months.
-	 * For example, NUM_DAYS[1] is 31, because January (month 1) has 31 days, and
-	 * NUM_DAYS[2] is 28, because February usually has 28 days. -1 appears in
-	 * position 0, because there is no month that corresponds to the number 0.
+	 * again, the positions of the values correspond to the numbers of the
+	 * months. For example, NUM_DAYS[1] is 31, because January (month 1) has 31
+	 * days, and NUM_DAYS[2] is 28, because February usually has 28 days. -1
+	 * appears in position 0, because there is no month that corresponds to the
+	 * number 0.
 	 */
-	public static final int[] NUM_DAYS = { -1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	public static final int[] NUM_DAYS = { -1, 31, 28, 31, 30, 31, 30, 31, 31,
+		30, 31, 30, 31 };
 
 	/*
 	 * A class-constant array containing the names of the days of the week.
 	 */
-	public static final String[] DAYS_OF_WEEK = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-			"Saturday" };
+	public static final String[] DAYS_OF_WEEK = { "Sunday", "Monday", "Tuesday",
+		"Wednesday", "Thursday", "Friday", "Saturday" };
 
 	/*
 	 * dayOfWeekNumber - a static helper method that takes a month number, day
-	 * number, and year as parameters, and returns the *number* of the day of the
-	 * week on which the corresponding date falls: 0 for Sunday, 1 for Monday, 2 for
-	 * Tuesday, etc. The algorithm for computing the appropriate number comes from
-	 * Robert Sedgewick and Kevin Wayne.
+	 * number, and year as parameters, and returns the *number* of the day of
+	 * the week on which the corresponding date falls: 0 for Sunday, 1 for
+	 * Monday, 2 for Tuesday, etc. The algorithm for computing the appropriate
+	 * number comes from Robert Sedgewick and Kevin Wayne.
 	 */
 	public static int dayOfWeekNumber(int month, int day, int year) {
 		int y0 = year - (14 - month) / 12;
@@ -138,21 +147,17 @@ public class Date {
 	 */
 
 	public static boolean isLeapYear(int year) {
-		// System.out.println( "year: " + year +" "+ year % 4 + " " + year % 100 + " " +
-		// year % 400);
 		boolean divisibleBy4 = year % 4 == 0;
-		boolean divisibleBy100 = year % 100 == 0;
-		boolean divisibleBy400 = year % 400 == 0;
+		boolean divisibleBy100 = year % 100 == 0; // true
+		boolean divisibleBy400 = year % 400 == 0; // false
 
-		if (divisibleBy4) {
-			if (divisibleBy100) {
-				if (!divisibleBy400) {
-					return false;
-				}
-			}
-			return true;
-		}
-		return false;
+		return divisibleBy4 && !(divisibleBy100 && !divisibleBy400);
+		// if (divisibleBy4) {
+		// return !(divisibleBy100 && !divisibleBy400);
+		// // if (divisibleBy100 && !divisibleBy400 ) { return false; }
+		// // return true;
+		// }
+		// return false;
 	}
 
 	public static int numDaysInMonth(int month, int year) {
@@ -165,29 +170,12 @@ public class Date {
 		return Date.NUM_DAYS[month];
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
-		try {
+		Date myDate = new Date(10, 9, 1953);
+		Date mySecondDate = new Date(10, 9, 1953);
 
-			Date myDate = new Date(10, 9, 1953);
-			Date mySecondDate = new Date(10, 9, 1953);
-
-			System.out.println("");
-			System.out.println(myDate.isBefore(mySecondDate));
-
-		} catch (Exception e) {
-
-			System.out.print("WE GOTS... EXCEPTION! :  ");
-			System.out.println(e);
-		}
+		System.out.println("");
+		System.out.println(myDate.isBefore(mySecondDate));
 	}
 }
-
-/**
- * // if(this.getYear() < dateToCompare.getYear()) { // return true; // } else
- * if (this.getYear() > dateToCompare.getYear()) { // return false; // } else {
- * // // same year // if( this.getMonth() < dateToCompare.getMonth()) { //
- * return true; // } else if ( this.getMonth() > dateToCompare.getMonth()){ //
- * return false; // } else { // // same year and month // if( this.getDay() <
- * dateToCompare.getDay()) { // return true; // } // return false; // } // }
- */
